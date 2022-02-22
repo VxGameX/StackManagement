@@ -1,3 +1,9 @@
+// IDS344 - 2022-01 - Grupo 1 - StackManagement
+// Nikita Kravchenko - 1101607
+// Omar Núñez - 1101587
+// Óliver Infante - 1100292
+// Lervis Pinales - 1096323
+
 #include <iostream>
 #include <stack>
 #include <Windows.h>
