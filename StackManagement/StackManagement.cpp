@@ -1,16 +1,14 @@
 // IDS344 - 2022-01 - Grupo 1 - StackManagement
 // Nikita Kravchenko - 1101607
 // Omar Núñez - 1101587
-// Óliver Infante - 1100292
+// Oliver Infante - 1100292
 // Lervis Pinales - 1096323
 
 #include <iostream>
 #include <stack>
 #include <Windows.h>
-#include "ControlFlow.h"
-/*Otra libreria que es muy importante en nuestro programa, es el uso del "ControlFlow"
-Ya que como estamos manejando estructuras de control, esto nos permite modificar
-El flujo de ejecucion de las instrucciones de nuestro programa */
+#include "ControlFlow.h" //nos permite modificar el flujo de ejecucion de las instrucciones de nuestro programa 
+
 
 
 using namespace std;
@@ -18,19 +16,17 @@ using namespace std;
 
 stack<string> values;
 
-
-
 int top = -1; // Inicializa el stack. No hay ningun nodo
 
 struct stacj {
-    int dato;
+    string dato;
     stacj* next;
 };
 
 void DebugMemory(stacj* pila);
 
 // se agrega un nodo
-void Push(stacj*& pila, int dato)
+void Push(stacj*& pila, string dato)
 {
     stacj* newNode = new stacj();
 
@@ -40,10 +36,11 @@ void Push(stacj*& pila, int dato)
     pila = newNode;
     top++;
 
-    DebugMemory(pila);
+    //DebugMemory(pila);
 }
 
-void Pop(stacj*& pila, int& dato)
+// se elimina un nodo
+void Pop(stacj*& pila, string& dato)
 {
     stacj* aux = pila;
 
@@ -57,41 +54,49 @@ void Pop(stacj*& pila, int& dato)
 
 void DisplayStack(stacj*& pila)
 {
-    int dato;
+    string dato;
 
     while (pila != NULL) {
-        DebugMemory(pila);
+        //DebugMemory(pila);
 
         Pop(pila, dato);
 
-        if (pila != NULL) cout << dato << ", ";
-        else cout << dato << ".";
-        top--;
+        if (pila != NULL) cout << dato << "\n";
+        else cout << dato << "\n";
+        //top--;
     }
 }
 
+bool isStackEmpty()
+{
+    bool answer = false;
+    if (top == -1) answer = true;
+    return answer;
+}
+
+// ayuda a aprender la vinculacion de nodos por puntero
 void DebugMemory(stacj* pila) {
     cout << *&pila << " is *&; " << &pila << " is &; " << pila << " is pila" << endl;
     cout << *&pila->dato << " is a data *&; " << &pila->dato << " is data &; " << pila->dato << " is data" << endl;
     cout << *&pila->next << " is next *&; " << &pila->next << " is next &; " << pila->next << " is next \n" << endl;
 }
 
+stacj* pila = NULL;
+string dato = "";
+
 int main()
 {
-    stacj* pila = NULL;
+    
+    /*
+    string dato = "aaa";
 
-    int dato = 1;
-
-    Push(pila, 12);
-    Push(pila, 23);
-    Push(pila, 2);
-    Push(pila, 5);
-    Push(pila, 8);
+    Push(pila, "im first");
+    Push(pila, "im second");
+    Push(pila, "im third");
 
     DisplayStack(pila);
-}
-
-/*
+    */
+    
     cout << "-- Stack Management --\n\n";
     cout << "- NOTE:\n";
     cout << "This program uses string data type to store given values.\n";
@@ -115,7 +120,7 @@ si mismo despues de estos mensajes, habilitamos un while con la funcion de nuest
 Con la funcion "DisplayMenu", es importante destacar que se hicieron estas funciones para no entorpeser 
 El programa con un codigo de manera lineal. */
 
-/*
+
 //<summary>
 // Displays program menu.
 // </summary>
@@ -166,7 +171,7 @@ Para que el programa no fuera tan lineal, esto ayuda para agilizar.
 Y al ultimo agregamos un "ClearConsole", esto para que cuando tengamos la opcion deseada
 Se quite el menu anterior y muestre las siguiente funciones*/
 
-/*
+
 
 // <summary>
 // Add value to stack.
@@ -182,14 +187,14 @@ void AddToStack()
         cout << "Enter the value (Press ESC enter last value): ";
         cin >> value;
 
-        values.push(value);
+        Push(pila, value);
+       // values.push(value);
     }
 }
 /*La funcion GetAsyncKeyState, detecta directamente la interrupcion de hardware del teclado
 Algunas personas dicen que es una especie de detencion en "tiempo real", esto para agregar el valor
 Este tipo de acciones no se suelen ver seguido, pero es una manera de implementarlo*/ 
 
-/*
 
 // <summary>
 //Removes stack top value.
@@ -198,6 +203,7 @@ void RemoveFromStack()
 {
     ClearConsole();
 
+    /*
     if (values.empty())
     {
         cout << "Stack is currently empty.\n";
@@ -209,12 +215,24 @@ void RemoveFromStack()
         values.pop();
         Pause();
     }
+    */
+
+    if (isStackEmpty())
+    {
+        cout << "Stack is currently empty.\n";
+        Pause();
+    }
+    else
+    {
+        cout << pila->dato << " removed.\n";
+        Pop(pila, dato);
+        Pause();
+    }
 }
 /*Como lo dice su funcion, consta de remover el valir del stack, como en la condicional nos hace mencion
 Si el valor esta vacio, nos dira que el stack esta vacio, donde elegimos la posicion
 De lo contrario, el valir es removido y agregamos la funcion .top, que nos regresa el ultimo elemento en el stack*/
 
-/*
 
 // <summary>
 // Shows all the stack values.
@@ -242,7 +260,6 @@ void ClearStack()
 Nos lanza un mensaje de que esta vacio, valgame la redundancia de las palabras, de lo contrario, entra en una
 Condicionante que nos dice que mientras el valor este existente, lo borre y nos mande el mensaje de limpio.*/
 
-/*
 
 // <summary>
 // Shows all the stack values.
@@ -251,9 +268,9 @@ void DisplayStack()
 {
     ClearConsole();
 
-    stack<string> aux;
+   // stack<string> aux;
 
-    if (values.empty())
+    if (isStackEmpty())
     {
         cout << "Stack is currently empty.\n";
     }
@@ -261,20 +278,11 @@ void DisplayStack()
     {
         cout << "- TOP -\n";
 
-        while (!values.empty())
-        {
-            cout << values.top() << "\n";
-            aux.push(values.top());
-            values.pop();
-        }
-        cout << "- BOTTOM -\n";
-
-        while (!aux.empty())
-        {
-            values.push(aux.top());
-            aux.pop();
-        }
+        DisplayStack(pila);
     }
+
+    cout << top;
+
     Pause();
 }
 /*En esta funcion ponemos varias conficionantes, esto mas que nada poder mostrar nuestro stack de manera grafica
@@ -282,7 +290,6 @@ Si una posicion esta vacia, dira que esta vacia, de lo contrario nos va a mostra
 Nos va dar el ordenamiento de los elementos del stack con las funciones .empty "true si el stack esta vacio"
  "push" es que agregara un elemento en el tope del stack y "top" que regresara el ulitmo elemento del stack*/
 
-/*
 
 //<summary>
 // Closes program.
@@ -326,4 +333,3 @@ void DisplayHelp()      //Funcion que mostrara para que sirven las opciones del 
 
     Pause();
 }
-*/
