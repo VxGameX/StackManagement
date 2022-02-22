@@ -16,8 +16,8 @@ stack<string> values;
 int main()
 {
     cout << "-- Stack Management --\n\n";
-    cout << "Welcome!\n";
-    cout << "This program uses data typee string to store given values.\n\n";
+    cout << "Welcome!\n\n";
+    cout << "- NOTE: This program uses string data type to store given values. -\n\n";
     
     while (true)
     {
@@ -32,11 +32,12 @@ void DisplayMenu()
 {
     int menuOption;
 
-    cout << "Select an option. (1 - 4)\n";
+    cout << "Select an option. (1 - 5)\n";
     cout << "1. Add\n";
     cout << "2. Remove\n";
-    cout << "3. Deploy\n";
-    cout << "4. Exit\n\n";
+    cout << "3. Display\n";
+    cout << "4. Deploy\n";
+    cout << "5. Exit\n\n";
     cout << ">> ";
 
     cin >> menuOption;
@@ -50,17 +51,21 @@ void DisplayMenu()
             RemoveFromStack();
             break;
         case 3:
-            DeployStack();
+            DisplayStack();
             break;
         case 4:
+            DeployStack();
+            break;
+        case 5:
             ExitProgram();
             break;
         default:
-            cout << "Please, enter a valid option. (1 - 4)";
+            cout << "Please, enter a valid option. (1 - 5)\n";
+            Pause();
             break;
     }
 
-    void ClearConsole();
+    ClearConsole();
 }
 
 /// <summary>
@@ -68,7 +73,7 @@ void DisplayMenu()
 /// </summary>
 void AddToStack()
 {
-    void ClearConsole();
+    ClearConsole();
 
     string value;
     cout << "Enter the value: ";
@@ -82,16 +87,18 @@ void AddToStack()
 /// </summary>
 void RemoveFromStack()
 {
+    ClearConsole();
+
     if (values.empty())
     {
         cout << "Stack is currently empty.\n";
-        Sleep(2000);
+        Pause();
     }
     else
     {
-        cout << values.top() << " removed.";
-        Sleep(2000);
+        cout << values.top() << " removed.\n";
         values.pop();
+        Pause();
     }
 }
 
@@ -105,6 +112,42 @@ void DeployStack()
         cout << values.top() << "\n";
         values.pop();
     }
+    cout << "Stack deployed.";
+    Pause();
+}
+
+/// <summary>
+/// Shows all the stack values.
+/// </summary>
+void DisplayStack()
+{
+    ClearConsole();
+
+    stack<string> aux;
+
+    if (values.empty())
+    {
+        cout << "Stack is currently empty.\n";
+    }
+    else
+    {
+        int i = 1;
+        while (!values.empty())
+        {
+            cout << i << "-- " << values.top() << "\n";
+            aux.push(values.top());
+            values.pop();
+
+            i++;
+        }
+
+        while (!aux.empty())
+        {
+            values.push(aux.top());
+            aux.pop();
+        }
+    }
+    Pause();
 }
 
 /// <summary>
@@ -121,4 +164,16 @@ void ExitProgram()
 void ClearConsole()
 {
     system("cls");
+    cout << "-- Stack Management --\n\n";
+}
+
+void Pause()
+{
+    cout << "\n";
+    system("pause");
+}
+
+void Pause(float seconds)
+{
+    Sleep(seconds * 1000);
 }
