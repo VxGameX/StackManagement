@@ -16,8 +16,8 @@ stack<string> values;
 int main()
 {
     cout << "-- Stack Management --\n\n";
-    cout << "Welcome!\n\n";
     cout << "- NOTE: This program uses string data type to store given values. -\n\n";
+    cout << "Welcome!\n\n";
     
     while (true)
     {
@@ -36,7 +36,7 @@ void DisplayMenu()
     cout << "1. Add\n";
     cout << "2. Remove\n";
     cout << "3. Display\n";
-    cout << "4. Deploy\n";
+    cout << "4. Clear\n";
     cout << "5. Exit\n\n";
     cout << ">> ";
 
@@ -54,7 +54,7 @@ void DisplayMenu()
             DisplayStack();
             break;
         case 4:
-            DeployStack();
+            ClearStack();
             break;
         case 5:
             ExitProgram();
@@ -73,13 +73,17 @@ void DisplayMenu()
 /// </summary>
 void AddToStack()
 {
-    ClearConsole();
-
     string value;
-    cout << "Enter the value: ";
-    cin >> value;
 
-    values.push(value);
+    while (GetAsyncKeyState(VK_ESCAPE) == 0)
+    {
+        ClearConsole();
+
+        cout << "Enter the value (Press ESC enter last value): ";
+        cin >> value;
+
+        values.push(value);
+    }
 }
 
 /// <summary>
@@ -105,14 +109,23 @@ void RemoveFromStack()
 /// <summary>
 /// Shows all the stack values.
 /// </summary>
-void DeployStack()
+void ClearStack()
 {
-    while (!values.empty())
+    ClearConsole();
+
+    if (values.empty())
     {
-        cout << values.top() << "\n";
-        values.pop();
+        cout << "Stack is currently empty.\n";
     }
-    cout << "Stack deployed.";
+    else
+    {
+        while (!values.empty())
+        {
+            //cout << values.top() << "\n";
+            values.pop();
+        }
+        cout << "Stack cleared.\n";
+    }
     Pause();
 }
 
@@ -131,15 +144,15 @@ void DisplayStack()
     }
     else
     {
-        int i = 1;
+        cout << "- TOP -\n";
+
         while (!values.empty())
         {
-            cout << i << "-- " << values.top() << "\n";
+            cout << values.top() << "\n";
             aux.push(values.top());
             values.pop();
-
-            i++;
         }
+        cout << "- BOTTOM -\n";
 
         while (!aux.empty())
         {

@@ -2,7 +2,7 @@ void DisplayMenu();
 void AddToStack();
 void RemoveFromStack();
 void DisplayStack();
-void DeployStack();
+void ClearStack();
 void ExitProgram();
 void ClearConsole();
 void Pause();
