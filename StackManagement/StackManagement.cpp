@@ -16,7 +16,14 @@ stack<string> values;
 int main()
 {
     cout << "-- Stack Management --\n\n";
-    cout << "- NOTE: This program uses string data type to store given values. -\n\n";
+    cout << "- NOTE:\n";
+    cout << "This program uses string data type to store given values.\n";
+    cout << "This program follows general stacks general rules.\n";
+    cout << "For help type 0. -\n\n";
+
+    Pause();
+    ClearConsole();
+
     cout << "Welcome!\n\n";
     
     while (true)
@@ -58,6 +65,9 @@ void DisplayMenu()
             break;
         case 5:
             ExitProgram();
+            break;
+        case 0:
+            DisplayHelp();
             break;
         default:
             cout << "Please, enter a valid option. (1 - 5)\n";
@@ -144,15 +154,15 @@ void DisplayStack()
     }
     else
     {
-        cout << "- TOP -\n";
+        cout << "* TOP *\n\n";
 
         while (!values.empty())
         {
-            cout << values.top() << "\n";
+            cout << "- " << values.top() << "\n";
             aux.push(values.top());
             values.pop();
         }
-        cout << "- BOTTOM -\n";
+        cout << "\n* BOTTOM *\n";
 
         while (!aux.empty())
         {
@@ -189,4 +199,17 @@ void Pause()
 void Pause(float seconds)
 {
     Sleep(seconds * 1000);
+}
+
+void DisplayHelp()
+{
+    ClearConsole();
+
+    cout << "- Add -- Adds the given value to the top of the stack.\n";
+    cout << "- Remove -- Removes the top value of the stack.\n";
+    cout << "- Display -- Displays all the elements of the stack, from top to bottom.\n";
+    cout << "- Clear -- Clears the entire stack.\n";
+    cout << "- Exit -- Exits the program.\n\n";
+
+    Pause();
 }
