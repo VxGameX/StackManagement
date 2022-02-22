@@ -5,61 +5,30 @@
 // Lervis Pinales - 1096323
 
 #include <iostream>
+#include <stack>
 #include <Windows.h>
-#include "ControlFlow.h"
+#include "ControlFlow.h" //nos permite modificar el flujo de ejecucion de las instrucciones de nuestro programa 
+
+
 
 using namespace std;
 
-stack* pila = NULL;
-string dato = "";
+
+stack<string> values;
 
 int top = -1; // Inicializa el stack. No hay ningun nodo
 
-/// <summary>
-/// 
-/// </summary>
-struct stack
-{
+struct stacj {
     string dato;
-    stack* next;
+    stacj* next;
 };
 
-int main()
+void DebugMemory(stacj* pila);
+
+// se agrega un nodo
+void Push(stacj*& pila, string dato)
 {
-    /*string dato = "aaa";
-
-    Push(pila, "im first");
-    Push(pila, "im second");
-    Push(pila, "im third");
-
-    DisplayStack(pila);*/
-
-    cout << "-- Stack Management --\n\n";
-    cout << "- NOTE:\n";
-    cout << "This program uses string data type to store given values.\n";
-    cout << "This program follows general stacks general rules.\n";
-    cout << "For help type 0. -\n\n";
-
-    Pause();
-    ClearConsole();
-
-    cout << "Welcome!\n\n";
-
-
-    while (true)
-    {
-        DisplayMenu();
-    }
-}
-
-/// <summary>
-/// 
-/// </summary>
-/// <param name="pila"></param>
-/// <param name="dato"></param>
-void Push(stack*& pila, string dato)
-{
-    stack* newNode = new stack();
+    stacj* newNode = new stacj();
 
     newNode->dato = dato;
     newNode->next = pila;
@@ -70,14 +39,10 @@ void Push(stack*& pila, string dato)
     //DebugMemory(pila);
 }
 
-/// <summary>
-/// 
-/// </summary>
-/// <param name="pila"></param>
-/// <param name="dato"></param>
-void Pop(stack*& pila, string& dato)
+// se elimina un nodo
+void Pop(stacj*& pila, string& dato)
 {
-    stack* aux = pila;
+    stacj* aux = pila;
 
     dato = aux->dato;
     pila = aux->next;
@@ -86,11 +51,8 @@ void Pop(stack*& pila, string& dato)
     top--;
 }
 
-/// <summary>
-/// 
-/// </summary>
-/// <param name="pila"></param>
-void DisplayStack(stack*& pila)
+
+void DisplayStack(stacj*& pila)
 {
     string dato;
 
@@ -105,10 +67,6 @@ void DisplayStack(stack*& pila)
     }
 }
 
-/// <summary>
-/// 
-/// </summary>
-/// <returns></returns>
 bool isStackEmpty()
 {
     bool answer = false;
@@ -116,15 +74,52 @@ bool isStackEmpty()
     return answer;
 }
 
-/// <summary>
-/// 
-/// </summary>
-/// <param name="pila"></param>
-void DebugMemory(stack* pila) {
+// ayuda a aprender la vinculacion de nodos por puntero
+void DebugMemory(stacj* pila) {
     cout << *&pila << " is *&; " << &pila << " is &; " << pila << " is pila" << endl;
     cout << *&pila->dato << " is a data *&; " << &pila->dato << " is data &; " << pila->dato << " is data" << endl;
     cout << *&pila->next << " is next *&; " << &pila->next << " is next &; " << pila->next << " is next \n" << endl;
 }
+
+stacj* pila = NULL;
+string dato = "";
+
+int main()
+{
+    
+    /*
+    string dato = "aaa";
+
+    Push(pila, "im first");
+    Push(pila, "im second");
+    Push(pila, "im third");
+
+    DisplayStack(pila);
+    */
+    
+    cout << "-- Stack Management --\n\n";
+    cout << "- NOTE:\n";
+    cout << "This program uses string data type to store given values.\n";
+    cout << "This program follows general stacks general rules.\n";
+    cout << "For help type 0. -\n\n";
+
+    Pause();
+    ClearConsole();
+
+    cout << "Welcome!\n\n";
+    
+
+    while (true)
+    {
+        DisplayMenu();
+    }
+}
+/*Nuestra primera funcion main, unicamente hacemos aviso al usuario que esta ejecutando este programa
+Y mas que nada aclarando que este programa utiliza datos recibidos por parte del usuario en cuestion
+si mismo despues de estos mensajes, habilitamos un while con la funcion de nuestro Menu de manera Grafica
+Con la funcion "DisplayMenu", es importante destacar que se hicieron estas funciones para no entorpeser 
+El programa con un codigo de manera lineal. */
+
 
 //<summary>
 // Displays program menu.
@@ -168,6 +163,15 @@ void DisplayMenu()
 
     ClearConsole();
 }
+/*Hacemos un desglose general de nuestro menu de una manera grafica con las opciones del 1 al 5
+Asi mismo capturamos el valor con la variable "menuOption" y este tambien declarado en
+La parte de nuestro inicio de la funcion, y como sabemos que dependiendo de
+El numero ingresado sera su funcion, y como lo explicaba en el menu, se hicieron funciones
+Para que el programa no fuera tan lineal, esto ayuda para agilizar.
+Y al ultimo agregamos un "ClearConsole", esto para que cuando tengamos la opcion deseada
+Se quite el menu anterior y muestre las siguiente funciones*/
+
+
 
 // <summary>
 // Add value to stack.
@@ -187,15 +191,20 @@ void AddToStack()
        // values.push(value);
     }
 }
+/*La funcion GetAsyncKeyState, detecta directamente la interrupcion de hardware del teclado
+Algunas personas dicen que es una especie de detencion en "tiempo real", esto para agregar el valor
+Este tipo de acciones no se suelen ver seguido, pero es una manera de implementarlo*/ 
+
 
 // <summary>
-// Removes stack top value.
+//Removes stack top value.
 // <summary>
 void RemoveFromStack()
 {
     ClearConsole();
 
-    /*if (values.empty())
+    /*
+    if (values.empty())
     {
         cout << "Stack is currently empty.\n";
         Pause();
@@ -205,7 +214,8 @@ void RemoveFromStack()
         cout << values.top() << " removed.\n";
         values.pop();
         Pause();
-    }*/
+    }
+    */
 
     if (isStackEmpty())
     {
@@ -219,29 +229,37 @@ void RemoveFromStack()
         Pause();
     }
 }
+/*Como lo dice su funcion, consta de remover el valir del stack, como en la condicional nos hace mencion
+Si el valor esta vacio, nos dira que el stack esta vacio, donde elegimos la posicion
+De lo contrario, el valir es removido y agregamos la funcion .top, que nos regresa el ultimo elemento en el stack*/
 
-//// <summary>
-//// Shows all the stack values.
-//// <summary>
-//void ClearStack()
-//{
-//    ClearConsole();
-//
-//    if (values.empty())
-//    {
-//        cout << "Stack is currently empty.\n";
-//    }
-//    else
-//    {
-//        while (!values.empty())
-//        {
-//            // cout << values.top() << "\n";
-//            values.pop();
-//        }
-//        cout << "Stack cleared.\n";
-//    }
-//    Pause();
-//}
+
+// <summary>
+// Shows all the stack values.
+// <summary>
+void ClearStack()
+{
+    ClearConsole();
+
+    if (values.empty())
+    {
+        cout << "Stack is currently empty.\n";
+    }
+    else
+    {
+        while (!values.empty())
+        {
+            // cout << values.top() << "\n";
+            values.pop();
+        }
+        cout << "Stack cleared.\n";
+    }
+    Pause();
+}
+/*Esta funcion es sencilla, basicamente es una condicion que analiza el stack, si el stack esta vacio
+Nos lanza un mensaje de que esta vacio, valgame la redundancia de las palabras, de lo contrario, entra en una
+Condicionante que nos dice que mientras el valor este existente, lo borre y nos mande el mensaje de limpio.*/
+
 
 // <summary>
 // Shows all the stack values.
@@ -267,16 +285,22 @@ void DisplayStack()
 
     Pause();
 }
+/*En esta funcion ponemos varias conficionantes, esto mas que nada poder mostrar nuestro stack de manera grafica
+Si una posicion esta vacia, dira que esta vacia, de lo contrario nos va a mostrar el stack, y como lo graficamos
+Nos va dar el ordenamiento de los elementos del stack con las funciones .empty "true si el stack esta vacio"
+ "push" es que agregara un elemento en el tope del stack y "top" que regresara el ulitmo elemento del stack*/
 
-// <summary>
+
+//<summary>
 // Closes program.
 // <summary>
 void ExitProgram()
 {
     exit(EXIT_SUCCESS);
 }
+//Esta funcion finaliza el programa.
 
-// <summary>
+//<summary>
 // Closes program.
 // <summary>
 void ClearConsole()
@@ -285,19 +309,19 @@ void ClearConsole()
     cout << "-- Stack Management --\n\n";
 }
 
-/// <summary>
-/// 
-/// </summary>
+
 void Pause()
 {
     cout << "\n";
     system("pause");
 }
 
-/// <summary>
-/// Funcion que mostrara para que sirven las opciones del menu de interaccion 
-/// </summary>
-void DisplayHelp()
+void Pause(float seconds)
+{
+    Sleep(seconds * 1000);
+}
+
+void DisplayHelp()      //Funcion que mostrara para que sirven las opciones del menu de interaccion 
 {
     ClearConsole();
 

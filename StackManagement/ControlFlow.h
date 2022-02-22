@@ -8,4 +8,3 @@ void ClearConsole();
 void Pause();
 void Pause(float seconds);
 void DisplayHelp();
-void DebugMemory(stack* pila);
