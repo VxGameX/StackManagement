@@ -52,7 +52,6 @@ void DisplayStack(nodo*& pila)
     }
 }
 
-
 string DisplayNode(nodo*& pila)
 {
     string dato;
@@ -63,8 +62,7 @@ string DisplayNode(nodo*& pila)
     Pop(pila);        
 }
 
-
-bool isStackEmpty(nodo*& pila)
+bool IsStackEmpty(nodo*& pila)
 {
     bool answer = false;
 
@@ -79,5 +77,3 @@ void DebugMemory(nodo* pila)
     cout << *&pila->dato << " is a data *&; " << &pila->dato << " is data &; " << pila->dato << " is data" << endl;
     cout << *&pila->next << " is next *&; " << &pila->next << " is next &; " << pila->next << " is next \n" << endl;
 }
-
-

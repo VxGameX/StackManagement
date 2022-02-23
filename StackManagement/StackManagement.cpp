@@ -81,7 +81,7 @@ void AddToStack()
 
     ClearConsole();
 
-    cout << "Enter the value (Press ESC enter last value): ";
+    cout << "Enter the value: ";
     cin >> value;
 
     Push(pila, value);    
@@ -95,11 +95,12 @@ void RemoveFromStack()
 {
     ClearConsole();
 
-    if (isStackEmpty(pila))
+    if (IsStackEmpty(pila))
     {
         cout << "Stack is currently empty.\n";
         Pause();
     }
+
     else
     {
         cout << DisplayNode(pila) << " removed.\n";
@@ -116,10 +117,11 @@ void DisplayStack()
 {
     ClearConsole();
 
-    if (isStackEmpty(pila))
+    if (IsStackEmpty(pila))
     {
         cout << "Stack is currently empty.\n";
     }
+
     else
     {
         cout << "- TOP -\n";
