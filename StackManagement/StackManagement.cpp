@@ -117,9 +117,8 @@ void DisplayMenu()
     cout << "Select an option. (1 - 5)\n";
     cout << "1. Add\n";
     cout << "2. Remove\n";
-    cout << "3. Display\n";
-    cout << "4. Clear\n";
-    cout << "5. Exit\n\n";
+    cout << "3. Display all\n";
+    cout << "4. Exit\n\n";
     cout << ">> ";
 
     cin >> menuOption;
@@ -136,9 +135,6 @@ void DisplayMenu()
         DisplayStack();
         break;
     case 4:
-        ClearStack();
-        break;
-    case 5:
         ExitProgram();
         break;
     default:
