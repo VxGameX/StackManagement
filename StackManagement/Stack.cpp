@@ -57,12 +57,10 @@ string DisplayNode(nodo*& pila)
 {
     string dato;
 
-   // while (pila != NULL) {
-        dato = pila->dato;
+    dato = pila->dato;
 
-        return dato;
-        Pop(pila);        
-  //  }
+    return dato;
+    Pop(pila);        
 }
 
 

@@ -25,7 +25,6 @@ int main()
     ClearConsole();
 
     cout << "Welcome!\n\n";
-    
 
     while (true)
     {
@@ -40,7 +39,7 @@ void DisplayMenu()
 {
     int menuOption;
 
-    cout << "Select an option. (1 - 5)\n";
+    cout << "Select an option. (1 - 4)\n";
     cout << "1. Add\n";
     cout << "2. Remove\n";
     cout << "3. Display all\n";
@@ -64,7 +63,7 @@ void DisplayMenu()
         ExitProgram();
         break;
     default:
-        cout << "Please, enter a valid option. (1 - 5)\n";
+        cout << "Please, enter a valid option. (1 - 4)\n";
         Pause();
         break;
     }
@@ -117,8 +116,6 @@ void DisplayStack()
 {
     ClearConsole();
 
-   // stack<string> aux;
-
     if (isStackEmpty(pila))
     {
         cout << "Stack is currently empty.\n";
@@ -135,8 +132,6 @@ void DisplayStack()
     Pause();
 }
 
-
-
 //<summary>
 // Closes program.
 // <summary>
@@ -144,7 +139,6 @@ void ExitProgram()
 {
     exit(EXIT_SUCCESS);
 }
-//Esta funcion finaliza el programa.
 
 //<summary>
 // Closes program.
@@ -155,16 +149,10 @@ void ClearConsole()
     cout << "-- Stack Management --\n\n";
 }
 
-
 void Pause()
 {
     cout << "\n";
     system("pause");
-}
-
-void Pause(float seconds)
-{
-    Sleep(seconds * 1000);
 }
 
 void DisplayHelp()      //Funcion que mostrara para que sirven las opciones del menu de interaccion 
@@ -173,8 +161,7 @@ void DisplayHelp()      //Funcion que mostrara para que sirven las opciones del 
 
     cout << "- Add -- Adds the given value to the top of the stack.\n";
     cout << "- Remove -- Removes the top value of the stack.\n";
-    cout << "- Display -- Displays all the elements of the stack, from top to bottom.\n";
-    cout << "- Clear -- Clears the entire stack.\n";
+    cout << "- Display -- Displays all the elements of the stack, from top to bottom and removes them.\n";
     cout << "- Exit -- Exits the program.\n\n";
 
     Pause();
