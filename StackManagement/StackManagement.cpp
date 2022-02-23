@@ -5,81 +5,13 @@
 // Lervis Pinales - 1096323
 
 #include <iostream>
-#include <iostream>
 #include <Windows.h>
 #include "ControlFlow.h" //nos permite modificar el flujo de ejecucion de las instrucciones de nuestro programa 
-
-
+#include "Stack.h" //nos permite modificar el flujo de ejecucion de las instrucciones de nuestro programa 
 
 using namespace std;
 
-
-struct nodo {
-    string dato;
-    nodo* next;
-};
-
-void DebugMemory(nodo* pila);
-
-// se agrega un nodo
-void Push(nodo*& pila, string dato)
-{
-    nodo* newNode = new nodo();
-
-    newNode->dato = dato;
-    newNode->next = pila;
-
-    pila = newNode;
-
-    /*
-    DebugMemory(pila);
-    system("pause");
-    */
-}
-
-// se elimina un nodo
-void Pop(nodo*& pila, string& dato)
-{
-    nodo* aux = pila;
-
-    if (aux != NULL) {
-        dato = aux->dato;
-        pila = aux->next;
-
-        delete aux;
-    }
-}
-
-
-void DisplayStack(nodo*& pila)
-{
-    string dato;
-
-    while (pila != NULL) {
-        Pop(pila, dato);
-
-        if (pila != NULL) cout << dato << "\n";
-        else cout << dato << "\n";
-    }
-}
-
-bool isStackEmpty(nodo*& pila)
-{
-    bool answer = false;
-
-    if (pila == NULL) answer = true;
-    return answer;
-}
-
-// ayuda a aprender la vinculacion de nodos por puntero
-void DebugMemory(nodo* pila) {
-    cout << *&pila << " is *&; " << &pila << " is &; " << pila << " is pila" << endl;
-    cout << *&pila->dato << " is a data *&; " << &pila->dato << " is data &; " << pila->dato << " is data" << endl;
-    cout << *&pila->next << " is next *&; " << &pila->next << " is next &; " << pila->next << " is next \n" << endl;
-}
-
 nodo* pila = NULL;
-string dato = "";
 
 int main()
 {    
@@ -100,12 +32,6 @@ int main()
         DisplayMenu();
     }
 }
-/*Nuestra primera funcion main, unicamente hacemos aviso al usuario que esta ejecutando este programa
-Y mas que nada aclarando que este programa utiliza datos recibidos por parte del usuario en cuestion
-si mismo despues de estos mensajes, habilitamos un while con la funcion de nuestro Menu de manera Grafica
-Con la funcion "DisplayMenu", es importante destacar que se hicieron estas funciones para no entorpeser 
-El programa con un codigo de manera lineal. */
-
 
 //<summary>
 // Displays program menu.
@@ -145,14 +71,6 @@ void DisplayMenu()
 
     ClearConsole();
 }
-/*Hacemos un desglose general de nuestro menu de una manera grafica con las opciones del 1 al 5
-Asi mismo capturamos el valor con la variable "menuOption" y este tambien declarado en
-La parte de nuestro inicio de la funcion, y como sabemos que dependiendo de
-El numero ingresado sera su funcion, y como lo explicaba en el menu, se hicieron funciones
-Para que el programa no fuera tan lineal, esto ayuda para agilizar.
-Y al ultimo agregamos un "ClearConsole", esto para que cuando tengamos la opcion deseada
-Se quite el menu anterior y muestre las siguiente funciones*/
-
 
 
 // <summary>
@@ -162,20 +80,13 @@ void AddToStack()
 {
     string value;
 
-    while (GetAsyncKeyState(VK_ESCAPE) == 0)
-    {
-        ClearConsole();
+    ClearConsole();
 
-        cout << "Enter the value (Press ESC enter last value): ";
-        cin >> value;
+    cout << "Enter the value (Press ESC enter last value): ";
+    cin >> value;
 
-        Push(pila, value);
-       // values.push(value);
-    }
+    Push(pila, value);    
 }
-/*La funcion GetAsyncKeyState, detecta directamente la interrupcion de hardware del teclado
-Algunas personas dicen que es una especie de detencion en "tiempo real", esto para agregar el valor
-Este tipo de acciones no se suelen ver seguido, pero es una manera de implementarlo*/ 
 
 
 // <summary>
@@ -185,20 +96,6 @@ void RemoveFromStack()
 {
     ClearConsole();
 
-    /*
-    if (values.empty())
-    {
-        cout << "Stack is currently empty.\n";
-        Pause();
-    }
-    else
-    {
-        cout << values.top() << " removed.\n";
-        values.pop();
-        Pause();
-    }
-    */
-
     if (isStackEmpty(pila))
     {
         cout << "Stack is currently empty.\n";
@@ -206,36 +103,12 @@ void RemoveFromStack()
     }
     else
     {
-        cout << pila->dato << " removed.\n";
-        Pop(pila, dato);
+        cout << DisplayNode(pila) << " removed.\n";
+        Pop(pila);
         Pause();
     }
 }
 
-// <summary>
-// Shows all the stack values.
-// <summary>
-void ClearStack()
-{
-    ClearConsole();
-
-    /*
-    if (values.empty())
-    {
-        cout << "Stack is currently empty.\n";
-    }
-    else
-    {
-        while (!values.empty())
-        {
-            // cout << values.top() << "\n";
-            values.pop();
-        }
-        cout << "Stack cleared.\n";
-    }
-    Pause();
-    */
-}
 
 // <summary>
 // Shows all the stack values.
