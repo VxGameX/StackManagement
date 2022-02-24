@@ -3,6 +3,7 @@
 // Omar Núñez - 1101587
 // Oliver Infante - 1100292
 // Lervis Pinales - 1096323
+// Daniel Báez - 1073597
 
 #include <iostream>
 #include <Windows.h>
@@ -18,8 +19,7 @@ int main()
     cout << "-- Stack Management --\n\n";
     cout << "- NOTE:\n";
     cout << "This program uses string data type to store given values.\n";
-    cout << "This program follows general stacks general rules.\n";
-    cout << "For help type 0. -\n\n";
+    cout << "This program follows general stacks general rules.\n\n";
 
     Pause();
     ClearConsole();
@@ -157,14 +157,3 @@ void Pause()
     system("pause");
 }
 
-void DisplayHelp()      //Funcion que mostrara para que sirven las opciones del menu de interaccion 
-{
-    ClearConsole();
-
-    cout << "- Add -- Adds the given value to the top of the stack.\n";
-    cout << "- Remove -- Removes the top value of the stack.\n";
-    cout << "- Display -- Displays all the elements of the stack, from top to bottom and removes them.\n";
-    cout << "- Exit -- Exits the program.\n\n";
-
-    Pause();
-}

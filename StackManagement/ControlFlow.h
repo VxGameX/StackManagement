@@ -7,4 +7,4 @@ void ExitProgram();
 void ClearConsole();
 void Pause();
 void Pause(float seconds);
-void DisplayHelp();
+
