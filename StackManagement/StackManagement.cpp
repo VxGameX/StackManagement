@@ -9,6 +9,7 @@
 #include <Windows.h>
 #include "ControlFlow.h" //nos permite modificar el flujo de ejecucion de las instrucciones de nuestro programa 
 #include "Stack.h" //nos permite modificar el flujo de ejecucion de las instrucciones de nuestro programa 
+#include <string> //stoi to check if its number
 
 using namespace std;
 
@@ -37,7 +38,8 @@ int main()
 // </summary>
 void DisplayMenu()
 {
-    int menuOption;
+    string menuOptionString;
+    int menuOption = 0;
 
     cout << "Select an option. (1 - 4)\n";
     cout << "1. Add\n";
@@ -46,7 +48,10 @@ void DisplayMenu()
     cout << "4. Exit\n\n";
     cout << ">> ";
 
-    cin >> menuOption;
+    cin >> menuOptionString;
+
+    if (IsNumber(menuOptionString)) menuOption = stoi(menuOptionString);
+    else menuOption = 0;
 
     switch (menuOption)
     {
@@ -71,6 +76,14 @@ void DisplayMenu()
     ClearConsole();
 }
 
+bool IsNumber(string s)
+{
+    for (int i = 0; i < s.length(); i++)
+        if (isdigit(s[i]) == false)
+            return false;
+
+    return true;
+}
 
 // <summary>
 // Add value to stack.

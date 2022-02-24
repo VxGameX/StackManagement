@@ -1,3 +1,5 @@
+#include <iostream>
+
 void DisplayMenu();
 void AddToStack();
 void RemoveFromStack();
@@ -7,4 +9,5 @@ void ExitProgram();
 void ClearConsole();
 void Pause();
 void Pause(float seconds);
+bool IsNumber(std::string s);
 
